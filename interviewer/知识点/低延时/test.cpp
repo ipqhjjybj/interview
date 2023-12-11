@@ -15,7 +15,7 @@ struct priceVolume{
 };
 
 struct depthResult{
-	int U;
+	string U;
 	priceVolume bids, asks;
 	void print(){
 		cout << "bids:" << endl;
@@ -77,6 +77,16 @@ string getStrValueFromKey(string s, string key){
 	return result;
 }
 
+string getStrIntgerValueFromKey(string s, string key){
+	int pos = s.find(key + "\"");
+	int n = key.size();
+	string result = s.substr(pos + n + 2);
+	int end_pos = result.find(",");
+	result = result.substr(0, end_pos);
+	//cout << result << endl;
+	return result;
+}
+
 struct depthUpdate parseDepthUpdate(string line){
 	depthUpdate data;
 	int pos = line.find("\"result\"");
@@ -100,6 +110,9 @@ struct depthUpdate parseDepthUpdate(string line){
 	int mid_s = right_line.find("\"s\":\"");
 	string mid_line = right_line.substr(0, mid_s);
 	string end_line = right_line.substr(mid_s);
+
+	data.result.U = getStrIntgerValueFromKey(mid_line, "U");
+	cout << "data.result.U: " << data.result.U << endl;
 	cout << "mid_line:" << mid_line << endl;
 	cout << "end_line:" << end_line << endl;
 
