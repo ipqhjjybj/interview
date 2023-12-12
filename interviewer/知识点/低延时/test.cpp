@@ -2,7 +2,12 @@
 #include <iostream>
 #include <string>
 #include <vector>
+
+#include<chrono>
 using namespace std;
+using namespace chrono;
+
+typedef std::chrono::high_resolution_clock Clock;
 
 struct priceVolume{
 	string price;
@@ -65,12 +70,19 @@ struct depthUpdate parseDepthUpdate(string line);
 int main(){
 	string line;
 	
-	while(cin >> line){
-		cout << line << endl;
+	//while(cin >> line){
+		//cout << line << endl;
+	cin >> line;
 
+		auto t1 = Clock::now();//计时开始
 		depthUpdate ans = parseDepthUpdate(line);
-		ans.print();
-	}
+		auto t2 = Clock::now();//计时结束
+
+		cout << "compute time:" << endl;
+		std::cout <<std::chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count() / 1e+3 << '\n';
+
+		//ans.print();
+	//}
 	
 	// while(cin >> line){
 	// 	cout << line << endl;
@@ -141,19 +153,19 @@ struct depthUpdate parseDepthUpdate(string line){
 	string left_line = line.substr(0, pos);
 	string right_line = line.substr(pos);
 	
-	cout << "left_line:" << left_line << endl;
+	//cout << "left_line:" << left_line << endl;
 
 	data.time = atoi(left_line.substr(8, 10).c_str());
 	data.time_ms = left_line.substr(29, 13);
 	data.channel = getStrValueFromKey(left_line, "channel");
 	data.event = getStrValueFromKey(left_line, "event");
 
-	cout << "time:" << data.time << endl;
-	cout << "time_ms:" << data.time_ms << endl;
-	cout << "channel:" << data.channel << endl;
-	cout << "event:" << data.event << endl;
+	// cout << "time:" << data.time << endl;
+	// cout << "time_ms:" << data.time_ms << endl;
+	// cout << "channel:" << data.channel << endl;
+	// cout << "event:" << data.event << endl;
 
-	cout << "right_line:" << right_line << endl;
+	// cout << "right_line:" << right_line << endl;
 
 	int mid_s = right_line.find("\"s\":\"");
 	string mid_line = right_line.substr(0, mid_s);
