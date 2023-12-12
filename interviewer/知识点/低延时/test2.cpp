@@ -55,21 +55,24 @@ string getStrIntgerValueFromKey(string s, string key);
 string getStrValueFromKey(string s, string key);
 
 int main(){
+	string a = "22.3";
+	double s = stod(a);
+	cout << "s:" << s << endl;
 	// {"p":"38155.9","s":0}
 
 	//string result = getStrValueFromKey(ori, "channel");
-	cout << "debug 1" << endl;
-	vector<string> lines = getArrayValueFromKey(ori2, "b");
-	cout << "debug 2" << endl;
-	vector<priceVolume> vecPriceVolume;
-	for(int i = 0;i < lines.size();i++){
-		cout << "line:" << lines[i] << " why!!" << endl;
-		string ask_price = getStrValueFromKey(lines[i], "p");
-		string ask_sell_number = getStrIntgerValueFromKey(lines[i], "s");
+	// cout << "debug 1" << endl;
+	// vector<string> lines = getArrayValueFromKey(ori2, "b");
+	// cout << "debug 2" << endl;
+	// vector<priceVolume> vecPriceVolume;
+	// for(int i = 0;i < lines.size();i++){
+	// 	cout << "line:" << lines[i] << " why!!" << endl;
+	// 	string ask_price = getStrValueFromKey(lines[i], "p");
+	// 	string ask_sell_number = getStrIntgerValueFromKey(lines[i], "s");
 
-		cout << "ask_price:" << ask_price << endl;
-		cout << "ask_sell_number:" << ask_sell_number << endl;
-	}
+	// 	cout << "ask_price:" << ask_price << endl;
+	// 	cout << "ask_sell_number:" << ask_sell_number << endl;
+	// }
 
 	return 0;
 }
